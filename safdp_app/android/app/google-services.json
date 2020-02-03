@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "460224704472",
+    "firebase_url": "https://safdp-3d302.firebaseio.com",
+    "project_id": "safdp-3d302",
+    "storage_bucket": "safdp-3d302.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460224704472:android:8bd02639c5141007c8ccad",
+        "android_client_info": {
+          "package_name": "com.safdp.safdp_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460224704472-efv79e0qlka7bgndfe25bsvcv2quv3qi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUoYgD811Zo4L2qiJ4L_7gls-0o8n6sus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "460224704472-efv79e0qlka7bgndfe25bsvcv2quv3qi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
