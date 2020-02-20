@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:safdp_app/homepage.dart';
-import 'ChairmanMessage.dart';
+import 'GeneralAnnoucement.dart';
 import 'SafetyMessage.dart';
-import 'TrainingMessage.dart';
+import 'TrainerMessage.dart';
+import 'Attendence.dart';
 
 class Messages extends StatelessWidget {
   @override
@@ -14,7 +15,7 @@ class Messages extends StatelessWidget {
         }),
         title: Text('Messages'),
       ),
-      body : new Container(
+      body: SingleChildScrollView(
         child: new Center(
           child: new Column(
             children: <Widget>[
@@ -24,13 +25,13 @@ class Messages extends StatelessWidget {
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 15.0),
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/ChairmanMessage_Banner.jpg'),
+                    image: AssetImage('assets/GeneralAnnoucements_Banner.jpg'),
                     fit:BoxFit.cover,
                   ),
                 ),
                 child: FlatButton(
                   onPressed:() {
-                    Navigator.push(context,MaterialPageRoute(builder: (context)=>ChairmanMessage()));
+                    Navigator.push(context,MaterialPageRoute(builder: (context)=>GeneralAnnoucement()));
                   }, 
                   child: null,
                 ),
@@ -58,13 +59,30 @@ class Messages extends StatelessWidget {
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 15.0),
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/TrainingMessage_Banner.jpg'),
+                    image: AssetImage('assets/TrainerMessage_Banner.jpg'),
                     fit:BoxFit.cover,
                   ),
                 ),
                 child: FlatButton(
                   onPressed:() {
-                    Navigator.push(context,MaterialPageRoute(builder: (context)=>TrainingMessage()));
+                    Navigator.push(context,MaterialPageRoute(builder: (context)=>TrainerMessage()));
+                  }, 
+                  child: null,
+                ),
+              ),
+              new Container(
+                width: MediaQuery.of(context).size.width * 1,
+                height: MediaQuery.of(context).size.height * 0.20,
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 15.0),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/AttendenceTaking_Banner.jpg'),
+                    fit:BoxFit.cover,
+                  ),
+                ),
+                child: FlatButton(
+                  onPressed:() {
+                    Navigator.push(context,MaterialPageRoute(builder: (context)=>Attendence()));
                   }, 
                   child: null,
                 ),

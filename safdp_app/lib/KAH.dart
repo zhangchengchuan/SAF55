@@ -14,9 +14,9 @@ class KAHState extends State<KAH> {
   int _current = 0;
 
   List imgList = [
-    'assets/profile.jpg',
-    'assets/profile.jpg',
-    'assets/profile.jpg',
+    'assets/KAH_ParadeCommander.jpg',
+    'assets/KAH_ParadeRSM.jpg',
+    'assets/KAH_ColorRSM.jpg',
   ];
  
   List<T> map<T>(List list, Function handler) {
@@ -31,6 +31,7 @@ class KAHState extends State<KAH> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.indigo[900],
         title: Text('Key Appointment Holders'),
       ),
       body: Container(

@@ -10,10 +10,11 @@ class SAFDay2020 extends StatelessWidget {
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.indigo[900],
         leading:IconButton(icon: Icon(Icons.arrow_back), onPressed: (){
           Navigator.push(context,MaterialPageRoute(builder: (context)=>Homepage()));
         }),
-        title: Text('SAF Day 2020'),
+        title: Text('SAF Day Parade 2020'),
       ),
       body : SingleChildScrollView(
         child: new Center(

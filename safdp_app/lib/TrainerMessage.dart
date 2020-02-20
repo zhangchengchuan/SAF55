@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:intl/intl.dart';
 
 //Left with connections
 //final FirebaseApp app = FirebaseApp(
@@ -13,12 +14,12 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 // ),
 //); 
 
-class TrainingMessage extends StatefulWidget{
+class TrainerMessage extends StatefulWidget{
   @override
-  TrainingMessageState createState() => TrainingMessageState();
+  TrainerMessageState createState() => TrainerMessageState();
 }
 
-class TrainingMessageState extends State<TrainingMessage> {
+class TrainerMessageState extends State<TrainerMessage> {
   List<Item> trainingMessageList = List(); //Items
   Item trainingMessageItem; //Item
   DatabaseReference trainingMessageRef; //ItemRef
@@ -28,8 +29,13 @@ class TrainingMessageState extends State<TrainingMessage> {
   @override
   void initState(){
     super.initState();
-    trainingMessageItem = Item('', '');
-    trainingMessageRef = FirebaseDatabase.instance.reference().child('trainingMessageList'); //The name for the folder.
+
+    //Date
+    DateFormat dateFormat = DateFormat("yyyy-MM-dd \n HH:mm");
+    var date = dateFormat.format(DateTime.now());
+
+    trainingMessageItem = Item('', '', date);
+    trainingMessageRef = FirebaseDatabase.instance.reference().child('Trainer Message'); //The name for the folder.
     trainingMessageRef.onChildAdded.listen(_onEntryAdded);
     trainingMessageRef.onChildChanged.listen(_onEntryChanged);
   }
@@ -63,7 +69,7 @@ class TrainingMessageState extends State<TrainingMessage> {
   Widget build(BuildContext context){
     return Scaffold(
      appBar: AppBar(
-       title: Text('Training Messages'),
+       title: Text('Trainer Messages'),
     ),
     resizeToAvoidBottomPadding: false,
     body: Column(
@@ -123,36 +129,41 @@ class TrainingMessageState extends State<TrainingMessage> {
             query: trainingMessageRef,
             itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index){
             return new ListTile(
-              leading: Icon(Icons.message, color:Colors.red,),
+              contentPadding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+              leading: Icon(Icons.message, color:Colors.red),
               title: Text(trainingMessageList[index].title),
-              subtitle: Text(trainingMessageList[index].body),
+              subtitle: Text(trainingMessageList[index].body, textAlign: TextAlign.justify),
+              trailing: Text(trainingMessageList[index].date, textAlign: TextAlign.right),
               isThreeLine: true,
-            );
-          },
+              );
+            },
+          ),
         ),
-      ),
-     ],
+      ],
     )
-  );
- }
+    );
+  }
 }
       
 class Item {
    String key;
    String title;
    String body;
+   String date;
   
-   Item(this.title, this.body);
+   Item(this.title, this.body, this.date);
       
    Item.fromSnapshot(DataSnapshot snapshot)
        : key = snapshot.key,
          title = snapshot.value["title"],
-        body = snapshot.value["body"];
+         body = snapshot.value["body"],
+         date = snapshot.value["date"];
     
    toJson() {
      return {
       "title": title,
       "body": body,
+      "date": date,
      };
    }
 }

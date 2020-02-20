@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
-class StandardUniformNo4 extends StatelessWidget {
+class CnSUniformNo4 extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue[800],
         title: Text('Uniform Standard - No.4'),
       ),
       body: SingleChildScrollView(

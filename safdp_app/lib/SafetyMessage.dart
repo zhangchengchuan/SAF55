@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
+//import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:intl/intl.dart';
 
 //Left with connections
 //final FirebaseApp app = FirebaseApp(
@@ -16,24 +18,69 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 class SafetyMessage extends StatefulWidget{
   @override
   SafetyMessageState createState() => SafetyMessageState();
+
+
 }
 
 class SafetyMessageState extends State<SafetyMessage> {
+  //Items
   List<Item> safetyMessageList = List(); //Items
   Item safetyMessageItem; //Item
   DatabaseReference safetyMessageRef; //ItemRef
 
   final GlobalKey<FormState> safetyFormKey = GlobalKey<FormState>();
 
+  //Notification
+  //String notification = 'Just Testing';
+  //FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
+
   @override
   void initState(){
     super.initState();
-    safetyMessageItem = Item('', '');
+
+    //Date
+    DateFormat dateFormat = DateFormat("yyyy-MM-dd \n HH:mm");
+    var date = dateFormat.format(DateTime.now());
+    
+    //Message
+    safetyMessageItem = Item('', '', date);
     //final FirebaseDatabase database = new FirebaseDatabase(app:app);
     //safetyMessageRef = database.reference().child('safetyMessageList'); 
-    safetyMessageRef = FirebaseDatabase.instance.reference().child('safetyMessageList'); //The name for the folder.
+    safetyMessageRef = FirebaseDatabase.instance.reference().child('Safety Message'); //The name for the folder.
     safetyMessageRef.onChildAdded.listen(_onEntryAdded);
     safetyMessageRef.onChildChanged.listen(_onEntryChanged);
+
+    //Notification
+    //firebaseMessaging.configure(
+    //  onLaunch: (Map<String, dynamic > msg){
+    //    print('onLaunched called');
+    //    return;
+    //  },
+    //  onResume: (Map<String, dynamic > message){
+    //    print('onResume called');
+    //    return;
+    //  },
+    //  onMessage: (Map<String, dynamic > message){
+    //    print('onMessage called');
+    //    return;
+    // }
+    //);
+
+    //firebaseMessaging.requestNotificationPermissions(
+    //  const IosNotificationSettings(
+    //    sound: true,alert: true,badge: true
+    //  )
+    //);
+
+    //firebaseMessaging.onIosSettingsRegistered.listen((IosNotificationSettings setting) {
+    //  print('ISO setting Registered');
+    //});
+
+    //firebaseMessaging.getToken().then((token){
+    //  update(token);
+    //  DatabaseReference databaseReference = new FirebaseDatabase().reference();
+    //  databaseReference.child('Safety Message/$token').set({'token':token});
+    //});
   }
 
   _onEntryAdded(Event event){
@@ -60,6 +107,13 @@ class SafetyMessageState extends State<SafetyMessage> {
        safetyMessageRef.push().set(safetyMessageItem.toJson());
      }
   }
+
+  //update (String token) {
+  //  print(token);
+  //  notification = token;
+  //  setState(() {    
+  //  });
+  //}
 
   @override
   Widget build(BuildContext context){
@@ -125,36 +179,41 @@ class SafetyMessageState extends State<SafetyMessage> {
             query: safetyMessageRef,
             itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index){
             return new ListTile(
+              contentPadding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
               leading: Icon(Icons.message, color:Colors.red),
               title: Text(safetyMessageList[index].title),
-              subtitle: Text(safetyMessageList[index].body),
+              subtitle: Text(safetyMessageList[index].body, textAlign: TextAlign.justify),
+              trailing: Text(safetyMessageList[index].date, textAlign: TextAlign.right),
               isThreeLine: true,
-            );
-          },
+              );
+            },
+          ),
         ),
-      ),
-     ],
+      ],
     )
   );
- }
+  }
 }
-      
+
 class Item {
    String key;
    String title;
    String body;
+   String date;
   
-   Item(this.title, this.body);
+   Item(this.title, this.body, this.date);
       
    Item.fromSnapshot(DataSnapshot snapshot)
        : key = snapshot.key,
          title = snapshot.value["title"],
-        body = snapshot.value["body"];
+         body = snapshot.value["body"],
+         date = snapshot.value["date"];
     
    toJson() {
      return {
       "title": title,
       "body": body,
+      "date": date,
      };
    }
 }

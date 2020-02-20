@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'SAFDP_Homepage',
+      title: 'Homepage',
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),

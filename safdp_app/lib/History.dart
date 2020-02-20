@@ -5,6 +5,7 @@ class History extends StatelessWidget {
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.indigo[900],
         title: Text('History of SAF Day Parade'),
       ),
       body: SingleChildScrollView(

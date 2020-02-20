@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'SAFDay2020.dart';
 import 'Messages.dart';
-import 'Parades.dart';
+import 'CustomAndStandard.dart';
 import 'MyFeedback.dart';
 
 class Homepage extends StatelessWidget {
@@ -12,7 +12,7 @@ class Homepage extends StatelessWidget {
         leading:IconButton(icon: Icon(Icons.home), onPressed: (){
           //
         }),
-        title: Text('SAFDP Homepage'),
+        title: Text('Homepage'),
       ),
       body : new Container(
         child: new Center(
@@ -58,13 +58,13 @@ class Homepage extends StatelessWidget {
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 15.0),
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/Parades_Banner.jpg'),
+                    image: AssetImage('assets/CnS_Banner.jpg'),
                     fit:BoxFit.cover,
                   ),
                 ),
                 child: FlatButton(
                   onPressed:() {
-                    Navigator.push(context,MaterialPageRoute(builder: (context)=>Parades()));
+                    Navigator.push(context,MaterialPageRoute(builder: (context)=>CustomAndStandard()));
                   }, 
                   child: null,
                 ),
